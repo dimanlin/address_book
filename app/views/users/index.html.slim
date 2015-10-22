@@ -1,0 +1,30 @@
+h1
+  | Address book
+
+table.table
+  thead
+    tr
+      th #
+      th First Name
+      th Last Name
+      th Emails
+      th Phone numbers
+      th Actions
+  tbody
+    - @users.each do |user|
+      tr
+        td
+          = user.id
+        td
+          = user.first_name
+        td
+          = user.last_name
+        td
+          = user.emails.join(', ')
+        td
+          = user.phone_numbers.join(', ')
+        td
+          = link_to 'Edit', edit_users_path(user)
+          = link_to 'Show', users_path(user)
+          = link_to 'Delete', users_path(user), method: :destroy, data: { confirm: 'Are you sure?' }
+
