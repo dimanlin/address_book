@@ -10,18 +10,32 @@ h1
       | Last name
     = f.text_field :last_name
 
-  - @user.emails.each_with_index do |email, index|
-    p
-      label
-        ' Email
-        = index + 1
-      = text_field_tag 'user[emails][]', email
+  .email_fields
+    - @user.emails.each_with_index do |email, index|
+      p
+        label
+          ' Email
+          = index + 1
+        = email_field_tag 'user[emails][]', email
 
-  - @user.phone_numbers.each_with_index do |email, index|
-    p
-      label
-        ' Phone number
-        = index + 1
-      = text_field_tag 'user[emails][]', email
+  .phone_number_fields
+    - @user.phone_numbers.each_with_index do |phone_number, index|
+      p
+        label
+          ' Phone number
+          = index + 1
+        = phone_field_tag 'user[phone_numbers][]', phone_number
+        = link_to 'Remove', '#', class: 'remove_phone_number_field'
 
   = f.submit 'Save'
+
+script#template_phone_number
+  p
+    label
+      ' Phone number
+      | <%= index %>
+    = phone_field_tag 'user[phone_numbers][]', ''
+    = link_to 'Remove', '#', class: 'remove_phone_number_field'
+
+script#template_actions_for_phone_number
+  = link_to 'Add new one', '#', id: 'phone_number_add_new_one'

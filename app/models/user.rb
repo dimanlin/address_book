@@ -8,10 +8,10 @@ class User < ActiveRecord::Base
   private
 
   def uniq_emails
-    self.emails = (self.emails + emails).uniq
+    self.emails = emails.uniq
   end
 
   def uniq_phone_numbers
-    self.emails = (self.emails + emails).uniq
+    self.emails = emails.uniq
   end
 end
