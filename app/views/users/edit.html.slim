@@ -39,3 +39,16 @@ script#template_phone_number
 
 script#template_actions_for_phone_number
   = link_to 'Add new one', '#', id: 'phone_number_add_new_one'
+
+script#template_email
+  p
+    label
+      ' Email
+      | <%= index %>
+    = phone_field_tag 'user[emails][]', ''
+    = link_to 'Remove', '#', class: 'remove_email_field'
+
+script#template_actions_for_email
+  = link_to 'Add new one', '#', id: 'email_add_new_one'
+
+
