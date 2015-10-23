@@ -3,21 +3,13 @@
     label
       | First name
     = f.text_field :first_name
-    - if @user.errors.messages[:first_name]
-      span.error_message
-        = @user.errors.messages[:first_name].join(', ')
+    = error_message(@user, :first_name)
   p
     label
       | Last name
     = f.text_field :last_name
-    - if @user.errors.messages[:last_name]
-      span.error_message
-        = @user.errors.messages[:last_name].join(', ')
-
-  - if @user.errors.messages[:full_name]
-    p
-      span.error_message
-        = @user.errors.messages[:full_name].join(', ')
+    = error_message(@user, :last_name)
+  = error_message(@user, :full_name)
 
   .email_fields
     - @user.emails.each_with_index do |email, index|
@@ -27,10 +19,7 @@
           = index + 1
         = email_field_tag 'user[emails][]', email, formnovalidate: true
         = link_to 'Remove', '#', class: 'remove_email_field' if index > 0
-    - if @user.errors.messages[:emails]
-      p
-        span.error_message
-          = @user.errors.messages[:emails].join(', ')
+    = error_message(@user, :emails)
 
   .phone_number_fields
     - @user.phone_numbers.each_with_index do |phone_number, index|
@@ -40,10 +29,7 @@
           = index + 1
         = phone_field_tag 'user[phone_numbers][]', phone_number
         = link_to 'Remove', '#', class: 'remove_phone_number_field' if index > 0
-    - if @user.errors.messages[:phone_numbers]
-      p
-        span.error_message
-          = @user.errors.messages[:phone_numbers].join(', ')
+    = error_message(@user, :phone_numbers)
 
   = f.submit 'Save'
 

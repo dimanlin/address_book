@@ -30,3 +30,4 @@ table.table
           = link_to 'Show', user_path(id: user.id)
           = link_to 'Delete', user_path(id: user.id), method: :delete, data: { confirm: 'Are you sure?' }
 
+= link_to 'CVS export', users_path(format: :csv)
