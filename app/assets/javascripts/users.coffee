@@ -64,8 +64,24 @@ class ValidationForForm
     _.each filds_arr, (el) =>
       @add_error_message($(el), "can't be blank") if $(el).val().length == 0
 
+
+class Search
+  constructor: () ->
+    $('.search_field').length > 0
+    $('.search_field').on 'keyup', (event) ->
+      $('.user_info').show()
+      val = $(event.currentTarget).val()
+      unless val.length == 0
+        $('.user_info').each (index, el) ->
+          re = new RegExp(val)
+          if re.test($(el).text()) == true
+            $(el).show()
+          else
+            $(el).hide()
+
 $ ->
   new FieldControl('phone_number')
   new FieldControl('email')
   new ValidationForForm('.edit_user, .new_user')
+  new Search
 

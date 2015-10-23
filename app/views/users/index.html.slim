@@ -1,5 +1,7 @@
 h1
   | Address book
+p
+  = text_field_tag :search, '', class: 'search_field', placeholder: 'Search..'
 
 = link_to 'Add new address', new_user_path
 
@@ -14,7 +16,7 @@ table.table
       th Actions
   tbody
     - @users.each do |user|
-      tr
+      tr.user_info
         td
           = user.id
         td
