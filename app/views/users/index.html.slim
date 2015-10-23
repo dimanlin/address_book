@@ -27,6 +27,6 @@ table.table
           = user.phone_numbers.join(', ')
         td
           = link_to 'Edit', edit_user_path(id: user.id)
-          /= link_to 'Show', user_path(id: user.id)
-          /= link_to 'Delete', user_path(id: user.id), method: :destroy, data: { confirm: 'Are you sure?' }
+          = link_to 'Show', user_path(id: user.id)
+          = link_to 'Delete', user_path(id: user.id), method: :delete, data: { confirm: 'Are you sure?' }
 

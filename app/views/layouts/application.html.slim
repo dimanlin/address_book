@@ -7,4 +7,7 @@ head
   = csrf_meta_tags
 
 body
+  - if flash[:notice].present?
+    p.green
+      = flash[:notice]
   = yield

@@ -1,0 +1,24 @@
+h1
+  ' Show
+  = @user.full_name
+
+p
+  label
+    | First name
+  = @user.first_name
+p
+  label
+    | Last name
+  = @user.last_name
+p
+  label
+    | Emails
+  = @user.emails.join(', ')
+p
+  label
+    | Phone numbers
+  = @user.phone_numbers.join(', ')
+p
+  label
+    | Created at
+  = @user.created_at
