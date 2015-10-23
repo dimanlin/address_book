@@ -35,7 +35,7 @@ RSpec.describe UsersController, type: :controller do
       expect(assigns[:user].first_name).to eq('new_first_name')
       expect(assigns[:user].last_name).to eq('new_last_name')
       expect(assigns[:user].emails).to eq(['email_1@example.com', 'email_2@example.com'])
-      expect(assigns[:user].phone_numbers).to eq(['8(926)123-45-67', '8(926)123-45-68'])
+      expect(assigns[:user].phone_numbers).to eq(['89261234567', '89261234568'])
     end
   end
 
@@ -64,14 +64,14 @@ RSpec.describe UsersController, type: :controller do
         expect(User.take.first_name).to eq('first_name')
         expect(User.take.last_name).to eq('last_name')
         expect(User.take.emails).to eq(['email_1@example.com', 'email_2@example.com'])
-        expect(User.take.phone_numbers).to eq(['8(926)123-45-67', '8(926)123-45-68'])
+        expect(User.take.phone_numbers).to eq(['89261234567', '89261234568'])
       end
     end
 
     context 'fail' do
       before do
         post :create, user: { first_name: 'first_name',
-                              last_name: 'last_name',
+                              last_name: '',
                               emails: [],
                               phone_numbers: ['8(926)123-45-67', '8(926)123-45-68']}
       end
