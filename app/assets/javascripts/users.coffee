@@ -26,13 +26,16 @@ class ValidationForForm
 
         presence_email = _.filter $(event.currentTarget).find('input[type=email]'), (el) ->
               return $(el).val().length > 0
-        if presence_email.length == 0
-          @add_error_message($(event.currentTarget).find('input[type=email]:first'), "can't be blank")
 
         presence_phone_number = _.filter $(event.currentTarget).find('input[type=tel]'), (el) ->
           return $(el).val().length > 0
-        if presence_phone_number.length == 0
-          @add_error_message($(event.currentTarget).find('input[type=tel]:first'), "can't be blank")
+
+        if presence_email.length == 0 && presence_phone_number.length == 0
+          if presence_email.length == 0
+            @add_error_message($(event.currentTarget).find('input[type=email]:first'), "can't be blank")
+
+          if presence_phone_number.length == 0
+            @add_error_message($(event.currentTarget).find('input[type=tel]:first'), "can't be blank")
 
         $(event.currentTarget).find('input[type=email]').each (index, el) =>
           if $(el).val().length > 0

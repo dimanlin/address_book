@@ -8,8 +8,10 @@ class User < ActiveRecord::Base
 
   before_validation :remove_empty_values!
 
-  validates :first_name, :last_name, :emails, :phone_numbers, presence: true
+  validates :first_name, :last_name, presence: true
   validate :validate_full_name
+  validates :emails, presence: true, if: Proc.new { |user| !user.phone_numbers.present? }
+  validates :phone_numbers, presence: true, if: Proc.new { |user| !user.emails.present? }
 
   def self.import(file)
     spreadsheet = Roo::Spreadsheet.open(file)
