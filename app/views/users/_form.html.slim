@@ -1,0 +1,73 @@
+= @user.errors.full_messages
+= form_for @user, html: { novalidate: true } do |f|
+  p
+    label
+      | First name
+    = f.text_field :first_name
+    - if @user.errors.messages[:first_name]
+      span.error_message
+        = @user.errors.messages[:first_name].join(', ')
+  p
+    label
+      | Last name
+    = f.text_field :last_name
+    - if @user.errors.messages[:last_name]
+      span.error_message
+        = @user.errors.messages[:last_name].join(', ')
+
+  - if @user.errors.messages[:full_name]
+    p
+      span.error_message
+        = @user.errors.messages[:full_name].join(', ')
+
+  .email_fields
+    - @user.emails.each_with_index do |email, index|
+      p
+        label
+          ' Email
+          = index + 1
+        = email_field_tag 'user[emails][]', email, formnovalidate: true
+        = link_to 'Remove', '#', class: 'remove_email_field'
+    - if @user.errors.messages[:emails]
+      p
+        span.error_message
+          = @user.errors.messages[:emails].join(', ')
+
+  .phone_number_fields
+    - @user.phone_numbers.each_with_index do |phone_number, index|
+      p
+        label
+          ' Phone number
+          = index + 1
+        = phone_field_tag 'user[phone_numbers][]', phone_number
+        = link_to 'Remove', '#', class: 'remove_phone_number_field'
+    - if @user.errors.messages[:phone_numbers]
+      p
+        span.error_message
+          = @user.errors.messages[:phone_numbers].join(', ')
+
+  = f.submit 'Save'
+
+script#template_phone_number
+  p
+    label
+      ' Phone number
+      | <%= index %>
+    = phone_field_tag 'user[phone_numbers][]', ''
+    = link_to 'Remove', '#', class: 'remove_phone_number_field'
+
+script#template_actions_for_phone_number
+  = link_to 'Add one field for phone number', '#', id: 'phone_number_add_new_one'
+
+script#template_email
+  p
+    label
+      ' Email
+      | <%= index %>
+    = email_field_tag 'user[emails][]', ''
+    = link_to 'Remove', '#', class: 'remove_email_field'
+
+script#template_actions_for_email
+  = link_to 'Add new field for email', '#', id: 'email_add_new_one'
+
+

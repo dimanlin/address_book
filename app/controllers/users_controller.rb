@@ -17,6 +17,23 @@ class UsersController < ApplicationController
     end
   end
 
+  def new
+    @user = User.new
+    @user.phone_numbers << ''
+    @user.emails << ''
+  end
+
+  def create
+    @user = User.new(user_params)
+    if @user.save
+      redirect_to users_path, notice: 'User was created'
+    else
+      @user.phone_numbers << ''
+      @user.emails << ''
+      render action: :new
+    end
+  end
+
   private
 
   def user_params
