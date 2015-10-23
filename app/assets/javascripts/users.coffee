@@ -14,7 +14,40 @@ class FieldControl
         (event.currentTarget).closest('p').remove()
         return false
 
+class ValidationForForm
+  constructor: ->
+    if $('.edit_user').length > 0
+      $('.edit_user').on 'submit', (event) =>
+        @clear_from_errors()
+
+        $(event.currentTarget).find('input[type=email]').each (index, el) ->
+          if $(el).val().length > 0
+            re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+            if re.test($(el).val()) == false
+              error_message = $('<span />')
+              error_message.addClass('error_message')
+              error_message.text('Invalid email')
+              $(el).after(error_message)
+
+        $(event.currentTarget).find('input[type=tel]').each (index, el) ->
+          if $(el).val().length > 0
+            re = /^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/;
+            if re.test($(el).val()) == false
+              error_message = $('<span />')
+              error_message.addClass('error_message')
+              error_message.text('Invalid phone, example 8(926)123-45-67')
+              $(el).after(error_message)
+
+        if $('.edit_user').find('.error_message').length > 0
+          return false
+        else
+          return true
+
+  clear_from_errors: ->
+    $('.edit_user').find('.error_message').remove()
+
 $ ->
   new FieldControl('phone_number')
   new FieldControl('email')
+  new ValidationForForm
 

@@ -1,6 +1,6 @@
 h1
   | Edit user
-= form_for @user do |f|
+= form_for @user, html: { novalidate: true } do |f|
   p
     label
       | First name
@@ -16,7 +16,9 @@ h1
         label
           ' Email
           = index + 1
-        = text_field_tag 'user[emails][]', email, formnovalidate: true
+        = email_field_tag 'user[emails][]', email, formnovalidate: true
+        /span.error_message
+        /  | asdasdasd
 
   .phone_number_fields
     - @user.phone_numbers.each_with_index do |phone_number, index|
@@ -24,7 +26,7 @@ h1
         label
           ' Phone number
           = index + 1
-        = text_field_tag 'user[phone_numbers][]', phone_number
+        = phone_field_tag 'user[phone_numbers][]', phone_number
         = link_to 'Remove', '#', class: 'remove_phone_number_field'
 
   = f.submit 'Save'
@@ -34,7 +36,7 @@ script#template_phone_number
     label
       ' Phone number
       | <%= index %>
-    = text_field_tag 'user[phone_numbers][]', ''
+    = phone_field_tag 'user[phone_numbers][]', ''
     = link_to 'Remove', '#', class: 'remove_phone_number_field'
 
 script#template_actions_for_phone_number
@@ -45,7 +47,7 @@ script#template_email
     label
       ' Email
       | <%= index %>
-    = text_field_tag 'user[emails][]', ''
+    = email_field_tag 'user[emails][]', ''
     = link_to 'Remove', '#', class: 'remove_email_field'
 
 script#template_actions_for_email
