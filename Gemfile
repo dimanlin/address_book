@@ -25,6 +25,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'therubyracer'
 gem "slim-rails"
 gem 'sass'
+gem 'roo'
 
 
 # Use ActiveModel has_secure_password

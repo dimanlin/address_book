@@ -31,3 +31,6 @@ table.table
           = link_to 'Delete', user_path(id: user.id), method: :delete, data: { confirm: 'Are you sure?' }
 
 = link_to 'CVS export', users_path(format: :csv)
+= form_tag csv_import_users_path, multipart: true do
+  = file_field_tag :file
+  = submit_tag "Import"

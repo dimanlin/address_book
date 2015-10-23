@@ -11,6 +11,20 @@ class User < ActiveRecord::Base
   validates :first_name, :last_name, :emails, :phone_numbers, presence: true
   validate :validate_full_name
 
+  def self.import(file)
+    spreadsheet = Roo::Spreadsheet.open(file)
+    header = spreadsheet.row(1)
+    (2..spreadsheet.last_row).each do |i|
+      row = Hash[[header, spreadsheet.row(i)].transpose]
+      user = find_by_id(row["id"]) || new
+      user.first_name = row['first_name']
+      user.last_name = row['last_name']
+      user.phone_numbers = JSON.parse(row['phone_numbers'])
+      user.emails = JSON.parse(row['emails'])
+      user.save!
+    end
+  end
+
   def full_name
     "#{first_name} #{last_name}"
   end

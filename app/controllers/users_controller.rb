@@ -49,6 +49,11 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
+  def csv_import
+    User.import(params[:file])
+    redirect_to users_url, notice: "Users imported"
+  end
+
   private
 
   def user_params
