@@ -26,7 +26,7 @@
           ' Email
           = index + 1
         = email_field_tag 'user[emails][]', email, formnovalidate: true
-        = link_to 'Remove', '#', class: 'remove_email_field'
+        = link_to 'Remove', '#', class: 'remove_email_field' if index > 0
     - if @user.errors.messages[:emails]
       p
         span.error_message
@@ -39,7 +39,7 @@
           ' Phone number
           = index + 1
         = phone_field_tag 'user[phone_numbers][]', phone_number
-        = link_to 'Remove', '#', class: 'remove_phone_number_field'
+        = link_to 'Remove', '#', class: 'remove_phone_number_field' if index > 0
     - if @user.errors.messages[:phone_numbers]
       p
         span.error_message

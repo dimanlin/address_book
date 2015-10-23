@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
 
   before_save :uniq_emails
   before_save :uniq_phone_numbers
+  before_save :clear_phone_numbers
 
   before_validation :remove_empty_values!
 
@@ -15,6 +16,10 @@ class User < ActiveRecord::Base
   end
 
   private
+
+  def clear_phone_numbers
+    phone_numbers.collect! {|number| number.gsub('(', '').gsub(')', '').gsub('-', '').gsub('+', '')}
+  end
 
   def remove_empty_values!
     [emails, phone_numbers].each do |field|

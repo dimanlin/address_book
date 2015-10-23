@@ -59,4 +59,15 @@ RSpec.describe User, type: :model do
       expect(user.phone_numbers).to eq(['8(926)123-45-67'])
     end
   end
+
+  describe 'clear_phone_numbers' do
+    before do
+      user.phone_numbers = ["8(926)123-45-61"]
+      user.send(:clear_phone_numbers)
+    end
+
+    it do
+      expect(user.phone_numbers).to eq(['89261234561'])
+    end
+  end
 end
