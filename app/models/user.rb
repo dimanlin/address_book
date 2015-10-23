@@ -36,6 +36,6 @@ class User < ActiveRecord::Base
   end
 
   def uniq_phone_numbers
-    self.emails = emails.uniq
+    self.phone_numbers = phone_numbers.uniq
   end
 end
