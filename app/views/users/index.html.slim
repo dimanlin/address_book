@@ -29,6 +29,7 @@ table.table
           = link_to 'Edit', edit_user_path(id: user.id)
           = link_to 'Show', user_path(id: user.id)
           = link_to 'Delete', user_path(id: user.id), method: :delete, data: { confirm: 'Are you sure?' }
+          = link_to 'Sharing', sharing_user_path(id: user.id)
 
 = link_to 'CVS export', users_path(format: :csv)
 = form_tag csv_import_users_path, multipart: true do

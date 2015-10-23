@@ -8,6 +8,10 @@ Rails.application.routes.draw do
     collection do
       post :csv_import
     end
+
+    member do
+      get :sharing
+    end
   end
 
   # Example of regular route:

@@ -54,6 +54,12 @@ class UsersController < ApplicationController
     redirect_to users_url, notice: "Users imported"
   end
 
+  def sharing
+    user = User.find_by_id(params[:id])
+    UserMailer.shared('some_guy@address_book.com', user).deliver_now
+    redirect_to root_path
+  end
+
   private
 
   def user_params
