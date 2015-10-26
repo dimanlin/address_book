@@ -3,20 +3,20 @@ h1
 
 p
   label
-    | First name
+    ' First name:
   = @user.first_name
 
 p
   label
-    | Last name
+    ' Last name:
   = @user.last_name
 
 p
   label
-    | Emails
+    ' Emails:
   = @user.emails.join(',')
 
 p
   label
-    | phone_numbers
+    ' phone_numbers:
   = @user.phone_numbers.join(',')
