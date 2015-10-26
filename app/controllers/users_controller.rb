@@ -11,6 +11,8 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
+    @user.phone_numbers << '' if @user.phone_numbers.blank?
+    @user.emails << ''  if @user.emails.blank?
   end
 
   def update
